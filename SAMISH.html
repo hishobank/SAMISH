@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Love Countdown ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('your-photo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-shadow: 2px 2px 8px #000;
+        }
+        .heart {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 240px;
+            background: red;
+            border-radius: 75px 75px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart:after {
+            left: 150px;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 2rem;
+        }
+        .countdown p {
+            margin: 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">
+        <div class="countdown" id="countdown">
+            Loading...
+        </div>
+    </div>
+
+    <script>
+        // Change this to when you first met
+        const startDate = new Date("2025-02-21T00:00:00");
+
+        const countdown = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const now = new Date();
+            const diffTime = now - startDate;
+
+            if (diffTime < 0) {
+                countdown.innerHTML = "<p>We haven't met yet 💖</p>";
+                return;
+            }
+
+            const totalSeconds = Math.floor(diffTime / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            countdown.innerHTML = `
+                <p>${days} Days</p>
+                <p>${hours} Hours ${minutes} Min ${seconds} Sec</p>
+                <p>since we met ❤️</p>
+            `;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000); // update every second
+    </script>
+</body>
+</html>
