@@ -1,111 +1,142 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
+<link rel="icon" href="icon.jpg" type="image/jpeg" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Samish 💙 Story</title>
+<title>Samish💙</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Sans+Tamil&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
 <style>
+  /* Reset & base */
   *, *::before, *::after {
     box-sizing: border-box;
   }
-
   html, body {
     margin: 0; padding: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #001222;
-    color: #e0f7ff;
+    background: #00081c;
     overflow-x: hidden;
     position: relative;
+    color: #e0f7ff;
   }
 
-  /* Glowing Blue Heart Background */
-  body::before {
-    content: '';
+  /* Background hearts container */
+  .heart-bg {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, #4baeff88, #001222 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulseHeart 6s ease-in-out infinite;
-    z-index: -1;
-    filter: blur(100px);
-    opacity: 0.6;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
   }
 
-  @keyframes pulseHeart {
-    0%, 100% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.6;
+  /* Heart image style */
+  .heart-bg img.heart {
+    position: absolute;
+    bottom: -40px;
+    width: 30px;
+    height: 30px;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 10px #4baeffbb);
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0;
     }
-    50% {
-      transform: translate(-50%, -50%) scale(1.3);
+    10% {
       opacity: 0.9;
     }
+    100% {
+      transform: translateY(-110vh) scale(1.2);
+      opacity: 0;
+    }
   }
 
+  /* Different animation delays and horizontal positions */
+  .heart-bg img.heart:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 18s; }
+  .heart-bg img.heart:nth-child(2) { left: 20%; animation-delay: 3s; animation-duration: 16s; }
+  .heart-bg img.heart:nth-child(3) { left: 35%; animation-delay: 6s; animation-duration: 20s; }
+  .heart-bg img.heart:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 15s; }
+  .heart-bg img.heart:nth-child(5) { left: 65%; animation-delay: 5s; animation-duration: 19s; }
+  .heart-bg img.heart:nth-child(6) { left: 80%; animation-delay: 8s; animation-duration: 17s; }
+
+  /* Main container */
   .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 6rem 1rem 4rem;
     text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 
+  /* Title */
   #title {
     font-family: 'Great Vibes', cursive;
     font-size: 3.5rem;
     color: #89d4ff;
     text-shadow: 0 0 15px #4baeffaa, 0 0 30px #6be0ffcc;
-    margin-bottom: 2rem;
-    transition: opacity 0.8s ease;
-  }
-  #title.fade-out {
-    opacity: 0;
+    margin-bottom: 1rem;
   }
 
+  /* Since text */
+  #since-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #7fd8ff;
+    margin-bottom: 1.5rem;
+    user-select: none;
+    text-shadow: 0 0 8px #4baeffbb;
+  }
+
+  /* Countdown box */
   #countdown-box {
     background: rgba(30, 60, 100, 0.4);
     border-radius: 20px;
-    padding: 2rem;
+    padding: 2rem 3rem 2rem 3rem;
     box-shadow: 0 0 25px #4baeff88, inset 0 0 30px #7fd8ff55;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
     position: relative;
+    justify-content: center;
+    margin-bottom: 4rem;
   }
 
   .countdown-values {
     display: flex;
-    justify-content: center;
     gap: 3rem;
-    margin-top: 1rem;
   }
   .time-unit {
     text-align: center;
   }
   .time-unit .number {
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #c2e7ff;
     text-shadow: 0 0 10px #4baeffaa;
   }
   .time-unit .label {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #7fd8ff;
-    user-select: none;
   }
 
+  /* Heart drawing animation near countdown */
   #heart-anim {
     position: absolute;
-    top: -35px;
-    right: -35px;
-    width: 70px;
-    height: 70px;
+    top: -40px;
+    right: -40px;
+    width: 80px;
+    height: 80px;
   }
   #heart-anim svg {
     width: 100%;
@@ -118,7 +149,7 @@
   #heart-anim path {
     stroke-dasharray: 300;
     stroke-dashoffset: 300;
-    animation: drawErase 10s ease-in-out infinite;
+    animation: drawErase 15s ease-in-out infinite;
   }
   @keyframes drawErase {
     0%, 100% { stroke-dashoffset: 300; opacity: 1; }
@@ -126,21 +157,22 @@
     70%, 90% { opacity: 0; }
   }
 
+  /* Sections */
   section {
     padding: 4rem 1rem;
     min-height: 100vh;
     max-width: 900px;
     margin: 0 auto 5rem;
     opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(100px) scale(0.95);
+    transition: opacity 1.2s ease, transform 1.2s ease;
     text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
   section.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   section h2 {
@@ -151,132 +183,163 @@
     text-shadow: 0 0 10px #4baeffbb;
   }
 
-  section img {
-    width: 80%;
+  /* First memory image - no background box */
+  #section1 img {
+    width: 100%;
     max-width: 500px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #4baeff66, inset 0 0 15px #7fd8ff55;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0; /* no border or glow */
+    box-shadow: none;
+    margin-bottom: 2rem;
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    transition: transform 1s ease, opacity 1s ease;
-    margin-bottom: 1.5rem;
+    transform: scale(0.95);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    user-select: none;
   }
-  section.visible img {
+  #section1.visible img {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(1);
   }
 
-  .image-grid {
+  /* Memories grid - portrait ratio */
+  #section2 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
     width: 90%;
     margin: 0 auto;
   }
-  .image-grid img {
+  #section2 .image-grid img {
     width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #4baeff66, 0 0 40px #7fd8ff55;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 1s ease, transform 1s ease, box-shadow 0.3s ease;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #4baeff99, 0 0 45px #7fd8ffcc;
     cursor: pointer;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 1.2s ease, transform 1.2s ease;
   }
-  section.visible .image-grid img {
+  #section2.visible .image-grid img {
     opacity: 1;
     transform: scale(1);
   }
-  .image-grid img:hover {
-    box-shadow: 0 0 30px #4baeffaa, 0 0 50px #89d4ffcc;
+  #section2 .image-grid img:hover {
+    box-shadow: 0 0 40px #4baeffcc, 0 0 60px #89d4ffdd;
     transform: scale(1.05);
   }
 
+  /* Tamil section styling */
   #tamil-section h2 {
     font-family: 'Noto Sans Tamil', sans-serif;
     font-size: 2.5rem;
     color: #8ac9ff;
     text-shadow: 0 0 15px #4baeffbb;
   }
+
 </style>
 </head>
 <body>
 
-  <audio id="bg-music" src="samish-love.mp3" loop autoplay></audio>
+<!-- Background hearts floating with images -->
+<div class="heart-bg" aria-hidden="true">
+  <img src="heart.png" class="heart" />
+  <img src="heart.png" class="heart" />
+  <img src="heart.png" class="heart" />
+  <img src="heart.png" class="heart" />
+  <img src="heart.png" class="heart" />
+  <img src="heart.png" class="heart" />
+</div>
 
-  <div class="container">
-    <div id="title">Samish 💙 Story</div>
+<!-- Background music -->
+<audio id="bg-music" src="samish-love.mp3" loop autoplay></audio>
 
-    <div id="countdown-box">
-      <div id="countdown"></div>
-      <div class="countdown-values">
-        <div class="time-unit"><div class="number" id="days">0</div><div class="label">Days</div></div>
-        <div class="time-unit"><div class="number" id="hours">0</div><div class="label">H</div></div>
-        <div class="time-unit"><div class="number" id="minutes">0</div><div class="label">Min</div></div>
-        <div class="time-unit"><div class="number" id="seconds">0</div><div class="label">Sec</div></div>
-      </div>
-      <div id="heart-anim">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-                   2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5
-                   2.09C13.09 3.81 14.76 3 16.5 3
-                   19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
-                   11.54L12 21.35z"/>
-        </svg>
-      </div>
+<div class="container" role="main" aria-label="Countdown and title">
+  <div id="title">Samish 💙 Story</div>
+  <div id="since-text">Sweetest stretch of time</div>
+
+  <div id="countdown-box" aria-label="Time elapsed since we met">
+    <div class="countdown-values" role="list">
+      <div class="time-unit" role="listitem"><div class="number" id="days">0</div><div class="label">Days</div></div>
+      <div class="time-unit" role="listitem"><div class="number" id="hours">0</div><div class="label">H</div></div>
+      <div class="time-unit" role="listitem"><div class="number" id="minutes">0</div><div class="label">Min</div></div>
+      <div class="time-unit" role="listitem"><div class="number" id="seconds">0</div><div class="label">Sec</div></div>
+    </div>
+    <div id="heart-anim" aria-hidden="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5
+                 2.09C13.09 3.81 14.76 3 16.5 3
+                 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55
+                 11.54L12 21.35z"/>
+      </svg>
     </div>
   </div>
+</div>
 
-  <section id="section1">
-    <h2>Our First Memories</h2>
-    <img src="your-image1.png" alt="Our first memory photo" />
-  </section>
+<!-- Sections -->
 
-  <section id="section2">
-    <h2>Beautiful Memories Together</h2>
-    <div class="image-grid">
-      <img src="your-image2.png" alt="Memory 2" />
-      <img src="your-image3.png" alt="Memory 3" />
-      <img src="your-image4.png" alt="Memory 4" />
-      <img src="your-image5.png" alt="Memory 5" />
-      <img src="your-image6.png" alt="Memory 6" />
-    </div>
-  </section>
+<section id="section1" tabindex="-1" aria-label="Our First Memory">
+  <h2>First Memory</h2>
+  <img src="your-first-memory.png" alt="Our first memory photo" />
+</section>
 
-  <section id="tamil-section">
-    <h2>நம் காதல் என்றும் நிலைக்கட்டும் 💙</h2>
-  </section>
+<section id="section2" tabindex="-1" aria-label="Beautiful Memories Together">
+  <h2>Together, Our World </h2>
+  <div class="image-grid">
+    <img src="memory-2.png" alt="Memory 2" />
+    <img src="memory-3.png" alt="Memory 3" />
+    <img src="memory-4.png" alt="Memory 4" />
+    <img src="memory-5.png" alt="Memory 5" />
+    <img src="memory-6.png" alt="Memory 6" />
+    <img src="memory-7.png" alt="Memory 7" />
+  </div>
+</section>
 
-  <script>
-    const startDate = new Date("2025-02-21T23:00:00");
-    function updateCountdown() {
-      const now = new Date();
-      const diff = now - startDate;
-      const s = Math.floor(diff / 1000);
-      const d = Math.floor(s / 86400);
-      const h = Math.floor((s % 86400) / 3600);
-      const m = Math.floor((s % 3600) / 60);
-      const sec = s % 60;
-      document.getElementById("days").textContent = d;
-      document.getElementById("hours").textContent = h;
-      document.getElementById("minutes").textContent = m;
-      document.getElementById("seconds").textContent = sec;
+<section id="tamil-section" tabindex="-1" aria-label="Tamil Love Quote">
+  <h2>பார்த்ததும் தோற்றேனே 💙</h2>
+</section>
+
+<script>
+const startDate = new Date("2025-02-21T23:59:59");
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = now - startDate;
+  const s = Math.floor(diff / 1000);
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  document.getElementById("days").textContent = d;
+  document.getElementById("hours").textContent = h;
+  document.getElementById("minutes").textContent = m;
+  document.getElementById("seconds").textContent = sec;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+const sections = document.querySelectorAll("section");
+function revealSections() {
+  const triggerHeight = window.innerHeight * 0.85;
+  sections.forEach(section => {
+    if (section.getBoundingClientRect().top < triggerHeight) {
+      section.classList.add("visible");
     }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+  });
+}
+window.addEventListener("load", revealSections);
+window.addEventListener("scroll", revealSections);
 
-    const sections = document.querySelectorAll("section");
-    function revealSections() {
-      const triggerHeight = window.innerHeight * 0.85;
-      sections.forEach(section => {
-        if (section.getBoundingClientRect().top < triggerHeight) {
-          section.classList.add("visible");
-        } else {
-          section.classList.remove("visible");
-        }
-      });
-    }
-    window.addEventListener("scroll", revealSections);
-    window.addEventListener("load", revealSections);
-  </script>
+// Autoplay music fallback for browsers that block it
+window.addEventListener('load', function () {
+  const music = document.getElementById("bg-music");
+  music.play().catch(() => {
+    document.addEventListener('click', () => music.play());
+  });
+});
+</script>
+
 </body>
 </html>
